@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class MilionareBoard extends JFrame {
@@ -53,6 +55,8 @@ public class MilionareBoard extends JFrame {
     private boolean isBAvailable = true;
     private boolean isCAvailable = true;
     private boolean isDAvailable = true;
+    private ArrayList<Question> predefinedQuestionList;
+    private ArrayList<Question> gameQuestionList;
 
     MilionareBoard() {
 
@@ -60,6 +64,8 @@ public class MilionareBoard extends JFrame {
         paintOptionPane();
         createRewardArray();
         fillRewardArray();
+        preparePredefinedQuestionList();
+        prepareGameQuestionList();
 
         JLabel lblTitle = new JLabel("MILIONERZY");
         lblTitle.setSize(420, 50);
@@ -125,6 +131,8 @@ public class MilionareBoard extends JFrame {
         btnClaimPrize.setLocation(460, 320);
         btnClaimPrize.setMargin(new Insets(0, 0, 0, 0));
         add(btnClaimPrize);
+
+
 
         prepareNewQuestion(lblQuestion, btnanswerA, btnanswerB, btnanswerC, btnanswerD);
 
@@ -530,7 +538,7 @@ public class MilionareBoard extends JFrame {
                         showMessageBox("Rezygnujesz z dalszej gry", "Wygrywasz " + REWARD_500K);
                         break;
                 }
-                reset();
+                dispose();
             }
         });
     }
@@ -538,14 +546,12 @@ public class MilionareBoard extends JFrame {
     private void showDefeatMessage() {
         if (questionCounter > 4 && questionCounter <= 9) {
             showMessageBox("Przegrałeś!", "Przegrałeś! Ale dostajesz gwarantowane 1000zł");
-            reset();
         } else if (questionCounter > 9) {
             showMessageBox("Przegrałeś!", "Przegrałeś! Ale dostajesz gwarantowane 32000zł");
-            reset();
         } else {
             showMessageBox("Przegrałeś!", "Przegrałeś!");
-            reset();
         }
+        reset();
     }
 
     private void paintOptionPane() {
@@ -560,6 +566,10 @@ public class MilionareBoard extends JFrame {
     private void prepareNewQuestion(JLabel lblQuestion, MilionareButton btnanswerA, MilionareButton btnanswerB, MilionareButton btnanswerC, MilionareButton btnanswerD) {
         checkQuestionCounter();
         newQuestion(lblQuestion, btnanswerA, btnanswerB, btnanswerC, btnanswerD);
+        isAAvailable = true;
+        isBAvailable = true;
+        isCAvailable = true;
+        isDAvailable = true;
         setRolloverColorToDefault();
         btnanswerA.setEnabled(true);
         btnanswerB.setEnabled(true);
@@ -621,6 +631,7 @@ public class MilionareBoard extends JFrame {
             diamondLabelArray[i].setText("");
         }
         resetRewardArray();
+        prepareGameQuestionList();
         isAAvailable = true;
         isBAvailable = true;
         isCAvailable = true;
@@ -665,33 +676,59 @@ public class MilionareBoard extends JFrame {
     private void newQuestion(JLabel lblQuestion, MilionareButton btnanswerA, MilionareButton btnanswerB, MilionareButton btnanswerC, MilionareButton btnanswerD) {
 
         Random questionRandomizer = new Random();
-        int nextQuestion = questionRandomizer.nextInt(4) + 1;
-
-        switch (nextQuestion) {
-            case 1:
-                question = new Question("Test1?", "tak", "nie", "nie", "nie", 1,
-                        "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% ");
-                break;
-            case 2:
-                question = new Question("Test2?", "nie", "tak", "nie", "nie", 2,
-                        "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% ");
-                break;
-            case 3:
-                question = new Question("Test3?", "nie", "nie", "tak", "nie", 3,
-                        "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% ");
-                break;
-            case 4:
-                question = new Question("Test4?", "nie", "nie", "nie", "tak", 4,
-                        "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% ");
-                break;
-
-        }
+        int nextQuestion = questionRandomizer.nextInt(gameQuestionList.size());
+        question = gameQuestionList.get(nextQuestion);
+        gameQuestionList.remove(nextQuestion);
         lblQuestion.setText(question.getQuestion());
         btnanswerA.setText(A + question.getAnswerA());
         btnanswerB.setText(B + question.getAnswerB());
         btnanswerC.setText(C + question.getAnswerC());
         btnanswerD.setText(D + question.getAnswerD());
 
+    }
+
+    private void preparePredefinedQuestionList() {
+        predefinedQuestionList = new ArrayList<Question>();
+
+        predefinedQuestionList.add(new Question("Test1?", "tak", "nie", "nie", "nie", 1,
+                "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
+        predefinedQuestionList.add(new Question("Test2?", "nie", "tak", "nie", "nie", 2,
+                        "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
+        predefinedQuestionList.add(new Question("Test3?", "nie", "nie", "tak", "nie", 3,
+                        "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
+        predefinedQuestionList.add(new Question("Test4?", "nie", "nie", "nie", "tak", 4,
+                        "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
+        predefinedQuestionList.add(new Question("Test5?", "tak", "nie", "nie", "nie", 1,
+                "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
+        predefinedQuestionList.add(new Question("Test6?", "nie", "tak", "nie", "nie", 2,
+                "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
+        predefinedQuestionList.add(new Question("Test7?", "nie", "nie", "tak", "nie", 3,
+                "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
+        predefinedQuestionList.add(new Question("Test8?", "nie", "nie", "nie", "tak", 4,
+                "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
+        predefinedQuestionList.add(new Question("Test9?", "tak", "nie", "nie", "nie", 1,
+                "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
+        predefinedQuestionList.add(new Question("Test10?", "nie", "tak", "nie", "nie", 2,
+                "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
+        predefinedQuestionList.add(new Question("Test11?", "nie", "nie", "tak", "nie", 3,
+                "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
+        predefinedQuestionList.add(new Question("Test12?", "nie", "nie", "nie", "tak", 4,
+                "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
+        predefinedQuestionList.add(new Question("Test13?", "tak", "nie", "nie", "nie", 1,
+                "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
+        predefinedQuestionList.add(new Question("Test14?", "nie", "tak", "nie", "nie", 2,
+                "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
+        predefinedQuestionList.add(new Question("Test15?", "nie", "nie", "tak", "nie", 3,
+                "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
+        predefinedQuestionList.add(new Question("Test16?", "nie", "nie", "nie", "tak", 4,
+                "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
+
+    }
+
+    private void prepareGameQuestionList() {
+
+        gameQuestionList = new ArrayList<Question>(predefinedQuestionList);
+        Collections.shuffle(gameQuestionList);
     }
 
     private static void showMessageBox(final String Title, final String Message) {
