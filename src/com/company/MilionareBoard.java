@@ -545,9 +545,9 @@ public class MilionareBoard extends JFrame {
 
     private void showDefeatMessage() {
         if (questionCounter > 4 && questionCounter <= 9) {
-            showMessageBox("Przegrałeś!", "Przegrałeś! Ale dostajesz gwarantowane 1000zł");
+            showMessageBox("Przegrałeś!", "Przegrałeś! Ale dostajesz gwarantowane " + REWARD_1K);
         } else if (questionCounter > 9) {
-            showMessageBox("Przegrałeś!", "Przegrałeś! Ale dostajesz gwarantowane 32000zł");
+            showMessageBox("Przegrałeś!", "Przegrałeś! Ale dostajesz gwarantowane " + REWARD_32K);
         } else {
             showMessageBox("Przegrałeś!", "Przegrałeś!");
         }
@@ -690,38 +690,71 @@ public class MilionareBoard extends JFrame {
     private void preparePredefinedQuestionList() {
         predefinedQuestionList = new ArrayList<Question>();
 
-        predefinedQuestionList.add(new Question("Test1?", "tak", "nie", "nie", "nie", 1,
+        predefinedQuestionList.add(new Question("Jaki owad ma charakterystyczne kropki na czerwonych skrzydłach?", "biedronka", "świerszcz", "mucha", "stonka", 1,
                 "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
-        predefinedQuestionList.add(new Question("Test2?", "nie", "tak", "nie", "nie", 2,
+        predefinedQuestionList.add(new Question("W jakiej wodzie kąpany jest ktoś narwany?", "w lodowatej", "w gorącej", "w brudnej", "w zimnej", 2,
                         "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
-        predefinedQuestionList.add(new Question("Test3?", "nie", "nie", "tak", "nie", 3,
+        predefinedQuestionList.add(new Question("Które zwierzę ma trąbę?", "koń", "koliber", "słoń", "zebra", 3,
                         "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
-        predefinedQuestionList.add(new Question("Test4?", "nie", "nie", "nie", "tak", 4,
+        predefinedQuestionList.add(new Question("Które ze zwierząt biega najszybciej?", "jeż", "lew", "żółw", "gepard", 4,
                         "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
-        predefinedQuestionList.add(new Question("Test5?", "tak", "nie", "nie", "nie", 1,
+        predefinedQuestionList.add(new Question("Agenci Mulder i Scully to bohaterowie serialu Z archiwum...", "X", "Z", "A", "Y", 1,
                 "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
-        predefinedQuestionList.add(new Question("Test6?", "nie", "tak", "nie", "nie", 2,
+        predefinedQuestionList.add(new Question("Wiek pełnoletności w Polsce to?", "15 lat", "18 lat", "21 lat", "17 lat", 2,
                 "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
-        predefinedQuestionList.add(new Question("Test7?", "nie", "nie", "tak", "nie", 3,
+        predefinedQuestionList.add(new Question("Liderem którego z zespołów jest Robert Gawliński?", "De mono", "FNS", "Wilki", "O.N.A.", 3,
                 "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
-        predefinedQuestionList.add(new Question("Test8?", "nie", "nie", "nie", "tak", 4,
+        predefinedQuestionList.add(new Question("Napój ze sfermentowanego mleka klaczy to?", "cymes", "tequila", "sake", "kumys", 4,
                 "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
-        predefinedQuestionList.add(new Question("Test9?", "tak", "nie", "nie", "nie", 1,
+        predefinedQuestionList.add(new Question("Jakie miasto uznaje się za pierwszą stolicę Polski?", "Gniezno", "Warszawa", "Kazimierz", "Kraków", 1,
                 "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
-        predefinedQuestionList.add(new Question("Test10?", "nie", "tak", "nie", "nie", 2,
+        predefinedQuestionList.add(new Question("Kto oprócz dzieći nie ma głosu w znanym powiedzeniu?", "gady", "ryby", "ptaki", "bakterie", 2,
                 "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
-        predefinedQuestionList.add(new Question("Test11?", "nie", "nie", "tak", "nie", 3,
+        predefinedQuestionList.add(new Question("Samochód to popularnie:", "trzy kółka", "dwa kółka", "cztery kółka", "kółko", 3,
                 "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
-        predefinedQuestionList.add(new Question("Test12?", "nie", "nie", "nie", "tak", 4,
+        predefinedQuestionList.add(new Question("Jeśli robimy coś niedokładnie, to nie robimy tego:", "po łebkach", "na odwal się", "na odczepnego", "do końca", 4,
                 "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
-        predefinedQuestionList.add(new Question("Test13?", "tak", "nie", "nie", "nie", 1,
+        predefinedQuestionList.add(new Question("Ile atomów węgla znajduje się w czasteczce oktanu?", "8", "7", "6", "5", 1,
                 "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
-        predefinedQuestionList.add(new Question("Test14?", "nie", "tak", "nie", "nie", 2,
+        predefinedQuestionList.add(new Question("Które z tych powstań zakończyło się zwycięstwem Polski?", "listopadowe", "wielkopolskie", "styczniowe", "kościuszkowskie", 2,
                 "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
-        predefinedQuestionList.add(new Question("Test15?", "nie", "nie", "tak", "nie", 3,
+        predefinedQuestionList.add(new Question("W którym wieku żył Czyngis-Chan?", "IX", "XV", "XIII", "V", 3,
                 "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
-        predefinedQuestionList.add(new Question("Test16?", "nie", "nie", "nie", "tak", 4,
+        predefinedQuestionList.add(new Question("Kto wyreżyserował film pod tytułem 'E=mc^2'?", "A. Zaorski", "J. Bromski", "W. Pasikowski", "O. Lubaszenko", 4,
                 "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
+        predefinedQuestionList.add(new Question("Cztery do kwadradu to?", "16", "8", "40", "4", 1,
+                "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
+        predefinedQuestionList.add(new Question("Ktoś kto wierzy w wielu bogow, jest?", "monoteistą", "politeistą", "poligamistą", "monogamistą", 2,
+                "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
+        predefinedQuestionList.add(new Question("Podstawowym składnikiem chałwy jest?", "pszenica", "mak", "sezam", "karmel", 3,
+                "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
+        predefinedQuestionList.add(new Question("0,2 to ułamek?", "niewymierny", "zwykły", "okresowy", "dziesiętny", 4,
+                "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
+        predefinedQuestionList.add(new Question("Jakie drzewo nie ma nasion zebranych w szyszki?", "buk", "jodła", "dąb", "cedr", 1,
+                "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
+        predefinedQuestionList.add(new Question("Który z mierników mierzy napięcie?", "Amperomierz", "Woltomierz", "Faradomierz", "Kulombomierz", 2,
+                "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
+        predefinedQuestionList.add(new Question("Mówi sie że gdzie drwa rąbią, tam lecą:", "odłamki", "drzewa", "wióry", "drwale", 3,
+                "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
+        predefinedQuestionList.add(new Question("Plombę dentysta zakłada na dziurawy:", "balon", "worek", "nos", "ząb", 4,
+                "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
+        predefinedQuestionList.add(new Question("Jak nazywa się włoska potrawa z makaronu?", "spaghetti", "tiramisu", "sorbet", "pizzerino", 1,
+                "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
+        predefinedQuestionList.add(new Question("Jak nazywał sie prezydent RPA, który odszedł od polityki apartheidu?", "Mandela", "de Klerc", "Bush", "Botha", 2,
+                "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
+        predefinedQuestionList.add(new Question("Ktoś, kto robi kogoś w konia, wpuszcza go:", "w gruszki", "w jeżyny", "w mailny", "w pomyje", 3,
+                "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
+        predefinedQuestionList.add(new Question("O barwie tęczówki oka decyduje zawartość:", "ochry", "białek", "serotoniny", "melaniny", 4,
+                "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
+        predefinedQuestionList.add(new Question("W średniowieckim dziele literackim o miłości Tristian pokochał kogo:", "Izoldę", "Julię", "Izaurę", "Elżbietę", 1,
+                "A: 67% ", "B: 3% ", "C: 9% ", "D: 21% "));
+        predefinedQuestionList.add(new Question("Zjawisko gromadzenia się jakiejś substancji na powierzchni innej to:", "absorbcja", "adsorbcja", "izoterma", "spektroskopia", 2,
+                "A: 2% ", "B: 81% ", "C: 10% ", "D: 7% "));
+        predefinedQuestionList.add(new Question("W okresie międzywojennym Gdańsk był terytorium:", "szwedzkim", "niemieckim", "wolnym", "polskim", 3,
+                "A: 16% ", "B: 14% ", "C: 54% ", "D: 16% "));
+        predefinedQuestionList.add(new Question("Jak nazywa się drewniana okładzina ściany zrobiona z małych desek?", "terakota", "panele", "klepka", "boazeria", 4,
+                "A: 4% ", "B: 6% ", "C: 27% ", "D: 63% "));
+
 
     }
 
